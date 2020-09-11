@@ -1,0 +1,59 @@
+<!--KEY da API: QJEY0TLRC2Y0-->
+<!--loefa = Loefa.objects.create(like = 0, deslike = 0, total = 0, gif = variavel)COMO ADICIONAR NO BANCO-->
+{% extends  "model-page.html" %}}
+{% block style %}
+  <style>
+
+      .degrad{
+        background: linear-gradient(-90deg, #87CEFA, #4682B4 );
+      }
+      .polaroid{
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+        text-align: center;
+        margin-top: 40px;
+        background: linear-gradient(-90deg, #87CEFA, #4682B4 );
+      }
+
+      .container {
+        padding: 10px;
+      }
+
+      .but{
+        align-items: center;
+        margin-left: 5px;
+    
+      }
+  </style>  
+{% endblock %}
+
+{%block content%}
+
+  <!-- The Modal -->
+
+
+<form enctype="multipart/form-data" method="POST"> 
+
+  <div class="container mb-4" > {% csrf_token %}
+    <div class="row" style="min-width: 350px;">
+      {% for p in show %}
+      <div class="col-sm-4">
+        <div class="polaroid" >
+          <img src="{{p.gif}}" style="width:100%; width: 350px; height: 350px; object-fit:fill; "> </br>
+          <div class="container">
+            <h5> Média: {{p.total}}</h5> 
+            <h5>Total: {{p.like}}</h5></br>
+            <a href="/add/{{p.id}}/" method="POST">
+            <button type="button"   class="btn btn-success">Vote up</button> 
+            </a>
+            <a href="/noadd/{{p.id}}/" method="POST">
+            <button type="button"  class="btn btn-danger">Vote down</button> 
+             </a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</form>
+
+{%endblock%}
